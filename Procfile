@@ -1,0 +1,1 @@
+web: gunicorn gh-fb:app --log-file=-
