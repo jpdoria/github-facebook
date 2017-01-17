@@ -37,10 +37,19 @@ def webhook():
     x_hub_signature = request.headers.get('X-Hub-Signature')
 
     if x_hub_signature is None:
-        return 404
+        print('X-Hub-Signature not found')
+        return 'X-Hub-Signature not found', 404
     else:
         sha_name, signature = x_hub_signature.split('=')
         mac = hmac.new(bytes(os.environ['GH_WEBHOOK_SECRET'], 'utf-8'), msg=request.data, digestmod=hashlib.sha1)
+
+        if sha_name != 'sha1':
+            print('Incorrect hash signature')
+            return 'Incorrect hash signature', 403
+
+        if signature is None:
+            print('Signature not found')
+            return 'Signature not found', 404
 
         if hmac.compare_digest(mac.hexdigest(), signature):
             print('Hash OK')
@@ -65,7 +74,7 @@ def webhook():
 
     fb_post(author, repo_name, repo_url, commit_message, commit_id, description)
     print('Post OK')
-    return 'OK', 200
+    return 'Post OK', 200
 
 
 @app.route('/', methods=['GET'])
