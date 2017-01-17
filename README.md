@@ -109,7 +109,7 @@ heroku config:set FB_USER_TOKEN=<your new long-lived access token from Facebook>
 
 - Do a `git push` now and check your Facebook timeline!
 
-# Contribution
+# Contributing
 
 This project is still young and there are things that need to be done. If you have ideas that would improve this app, feel free to contribute!
 
