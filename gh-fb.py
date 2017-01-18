@@ -2,7 +2,7 @@ import hashlib
 import hmac
 import os
 import facebook
-from flask import Flask, request
+from flask import Flask, redirect, request
 
 
 app = Flask(__name__)
@@ -79,15 +79,7 @@ def webhook():
 
 @app.route('/', methods=['GET'])
 def main():
-    return """<!DOCTYPE html>
-<head>
-    <title>Whoa!</title>
-</head>
-<body>
-    <h1>o_O</h1>
-    <p>A visitor from the unknown! Hello, are you doing?</p>
-    <img src="http://loremflickr.com/600/400/">
-</body>""", 200
+    return redirect('http://www.lazyadm.in/', code=301)
 
 
 if __name__ == '__main__':
